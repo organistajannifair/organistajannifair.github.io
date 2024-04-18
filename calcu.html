@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/cafe" href="cafe.png">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .container1 {
+            background-color:chocolate;
+            border-radius: 15px;
+            width: 1000px;
+            height: 650px;
+        }
+
+        #Textbox1 {
+            font-family: garamond;
+            width: 275px;
+            height: 120px;
+            border-radius: 10px;
+            font-size: 18px;
+            resize: none;
+        }
+
+        #Textbox2 {
+            font-family: garamond;
+            width: 275px;
+            height: 120px;
+            border-radius: 10px;
+            font-size: 18px;
+            resize: none;
+        }
+
+        .btn {
+            width: 75px;
+            height: 40px;
+        }
+
+        .itemBtn {
+            width: 83px;
+            height: 50px;
+            border-radius: 10px;
+            margin: 5px;
+            font-size: 14px;
+			background-color:#f2f2f2;
+			color:black;
+        }
+
+        .spacebtn {
+            width: 137px;
+            height: 50px;
+
+        }
+    </style>
+    <script>
+        // Function to calculate total cost
+        function calculateTotal() {
+            let items = document.getElementById("Textbox1").value.split(" ");
+
+            const itemPrices = {
+                "Americano Coffee": 50,
+                "Cappucino": 55,
+                "Mocha": 65,
+                "Latte": 60,
+				"Black Coffee": 70,
+				"Espresso": 75,
+                // Add more clothing items and their prices as needed
+            };
+
+            let totalCost = 0;
+            items.forEach(item => {
+                if (item in itemPrices) {
+                    totalCost += itemPrices[item];
+                }
+            });
+
+            return totalCost;
+        }
+
+        // Function to generate receipt
+        function generateReceipt() {
+            let items = document.getElementById("Textbox1").value;
+            let totalCost = calculateTotal();
+
+            let receiptText = "Receipt:\n\n";
+            receiptText += "Items Purchased:\n";
+            receiptText += items + "\n";
+            receiptText += "Total Cost: Php" + totalCost.toFixed(2);
+
+            document.getElementById("Textbox2").value = receiptText;
+        }
+
+        function buttonClick(value) {
+            document.getElementById("Textbox1").value += value;
+        }
+
+        function clearTextBox1() {
+            document.getElementById("Textbox1").value = "";
+        }
+
+        function clearTextBox2() {
+            document.getElementById("Textbox2").value = "";
+        }
+    </script>
+</head>
+
+<body>
+    <center>
+        <div class="container1">
+            <table>
+                <tr>
+                    <td>
+                        <textarea id="Textbox1" rows="4" cols="50"></textarea>
+                    </td>
+                </tr>
+
+               
+                <tr>
+                    <td>
+					    <input type="button" value="Americano " class="itemBtn" onclick="buttonClick(' Americano Coffee ₱50')" />
+                        <input type="button" value="Cappucino" class="itemBtn" onclick="buttonClick(' Cappucino ₱55 ')" />
+                        <input type="button" value="Latte" class="itemBtn" onclick="buttonClick(' Latte ₱60 ')"/>
+                      
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+					<input type="button" value="Mocha" class="itemBtn" onclick="buttonClick(' Mocha ₱65 ')" />
+                    <input type="button" value="Black Coffee"  class="itemBtn" onclick="buttonClick('Black Coffee ₱70')"/>
+				    <input type="button" value="Espresso"  class="itemBtn" onclick="buttonClick('Espresso ₱75')"/>
+					<!-- Add more buttons for additional items here -->  
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                     
+                        <input type="button" value="Purchase" class="spacebtn" onclick="generateReceipt()" />
+                        <input type="button" value="Clear" class="spacebtn" onclick="clearTextBox1()" />
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <textarea id="Textbox2" rows="4" cols="50"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                       <input type="button" value="Save" class="spacebtn" onclick="saveFunction()" />
+                        <input type="button" value="Clear" class="spacebtn" onclick="clearTextBox2()" />
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+    </center>
+</body>
+</html>
